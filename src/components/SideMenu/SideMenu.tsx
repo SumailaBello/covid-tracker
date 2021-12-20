@@ -33,7 +33,7 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
         if(query) {
             let result = List.filter((state: any)=> state.province.toLowerCase().includes(query));
             setList(result);
-            console.log(result)
+            // console.log(result)
         }
         else {
             setList(props.store.states);
@@ -51,7 +51,7 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
     const loadStat = (stateName: string)=> {
         getStat(stateName).then(res => {
             const stat = res.data.data;
-            console.log(stat);
+            // console.log(stat);
             setStat(stat[0])
         }, error => {
             console.log(error);

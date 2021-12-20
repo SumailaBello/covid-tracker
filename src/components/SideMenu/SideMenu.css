@@ -2,6 +2,7 @@
     height: 100%;
 }
 
+/* removing unneeded default burger menu button */
 #react-burger-menu-btn {
     display: none !important;
 }

@@ -20,7 +20,7 @@ class Store {
         })
         getProvinces(isoCode).then(res => {
             const provinces = res.data.data;
-            console.log(provinces);
+            // console.log(provinces);
             this.filterStates(provinces);
         }, error => {
             console.log(error);
