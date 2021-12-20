@@ -74,7 +74,7 @@ export const CustomMarker: React.FC<Props> = inject('store')(observer((props) =>
           </Popover>
         }
       >
-        <strong className = "marker h6">
+        <strong className = "marker h6 bg-danger">
             {props.state.province}
         </strong>
       </OverlayTrigger>

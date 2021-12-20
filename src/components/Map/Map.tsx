@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import CustomMarker from './CustomMarker';
 import { observer, inject } from "mobx-react"; 
-import { List, AutoSizer } from "react-virtualized";
+// import { List, AutoSizer } from "react-virtualized";
 
 interface center {
     lat: number,

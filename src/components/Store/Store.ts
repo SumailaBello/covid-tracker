@@ -1,5 +1,5 @@
 import { action, makeObservable, observable, runInAction } from 'mobx';
-import {getProvinces, getStat} from '../Services/DataService';
+import {getProvinces} from '../Services/DataService';
 
 class Store {
     states: Array<any> = [];
@@ -8,7 +8,8 @@ class Store {
         makeObservable(this, {
             states: observable,
             error: observable,
-            filterStates: action
+            filterStates: action,
+            // searchStates: action,
         });
     }
 
@@ -37,24 +38,20 @@ class Store {
         console.log(states);
     }
 
-    // get ovid statistic for a given state
-    getStats = (state: string)=> {
-        console.log(state)
-        // runInAction(()=> {
-        //     this.error = false;
-        // })
-        getStat(state).then(res => {
-            const stat = res.data.data;
-            console.log(stat);
-            return stat;
-        }, error => {
-            console.log(error);
-            runInAction(()=> {
-                this.error = true;
-            })
-            alert("Unable to load data");
-        })
-    }
+    // get covid statistic for a given state
+    // getStats = (state: string)=> {
+    //     console.log(state)
+    //     getStat(state).then(res => {
+    //         const stat = res.data.data;
+    //         console.log(stat);
+    //     }, error => {
+    //         console.log(error);
+    //         runInAction(()=> {
+    //             this.error = true;
+    //         })
+    //         alert("Unable to load data");
+    //     })
+    // }
 
 }
 

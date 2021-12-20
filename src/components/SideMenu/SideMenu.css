@@ -1,0 +1,23 @@
+.menu-inner {
+    height: 100%;
+}
+
+#react-burger-menu-btn {
+    display: none !important;
+}
+
+.list {
+    border-bottom: 1px solid lightgrey;
+    margin-block: 10px;
+}
+
+.list :hover {
+    cursor: pointer;
+    color: black !important;
+}
+
+@media(max-width: 990px) {
+    .menu-style {
+      width: 80% !important;
+    }
+}
