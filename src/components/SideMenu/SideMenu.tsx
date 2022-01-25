@@ -56,7 +56,6 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
             // console.log(stat);
             setStat(stat[0])
         }, error => {
-            console.log(error);
             alert("Unable to load data");
         })
     }
@@ -68,12 +67,9 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
     }
 
     const handleCountrySelect = (event: any)=> {
-        console.log(JSON.parse(event.target.value));
         const country = JSON.parse(event.target.value);
-        console.log(country);
         // setSelectedCountry(country);
         props.store.selectCountry(country);
-        // console.log(event.target.value.name.common);
     }
 
     return (

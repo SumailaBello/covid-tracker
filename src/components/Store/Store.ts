@@ -25,10 +25,10 @@ class Store {
         })
         getProvinces(isoCode).then(res => {
             const provinces = res.data.data;
-            console.log(provinces);
+            // console.log(provinces);
             this.filterStates(provinces);
         }, error => {
-            console.log(error);
+            // console.log(error);
             runInAction(()=> {
                 this.error = true;
             })
@@ -45,7 +45,7 @@ class Store {
 
     getCountries = ()=> {
         getCountries().then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             const countries = res.data;
             this.sortCountries(countries);
             // this.countries = res.data;

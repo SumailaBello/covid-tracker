@@ -34,12 +34,9 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
 
     const handleApiLoaded = (map: any, maps: any)=> {
         console.log(map);
-        console.log(maps);
     }
 
     React.useEffect(()=> {
-        // const center = props.store.selectedCountry.latlng;
-        console.log(props.store.selectedCountry)
         if (props.store.selectedCountry) {
             setMapProps({
                 center: {
@@ -62,7 +59,7 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
         <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
             bootstrapURLKeys={{ 
-                key: 'AIzaSyCUfGRjkRG9pBXCobu8lphHw3qv0OMR0-M', language: 'en',
+                key: 'AIzaSyDsSwH60VugzfnwTEXadf6pThPIFTaBxZI', language: 'en',
                 // region: 'us',
                 libraries:['places'], 
             }}
