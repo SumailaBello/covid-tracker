@@ -1,14 +1,19 @@
 import { action, makeObservable, observable, runInAction } from 'mobx';
-import {getProvinces} from '../Services/DataService';
+import {getProvinces, getCountries} from '../Services/DataService';
 
 class Store {
+    countries: Array<any> = [];
     states: Array<any> = [];
     error: boolean = false;
+    selectedCountry: any = null;
     constructor() {
         makeObservable(this, {
             states: observable,
             error: observable,
+            countries: observable,
+            selectedCountry: observable,
             filterStates: action,
+            sortCountries: action,
             // searchStates: action,
         });
     }
@@ -20,14 +25,14 @@ class Store {
         })
         getProvinces(isoCode).then(res => {
             const provinces = res.data.data;
-            // console.log(provinces);
+            console.log(provinces);
             this.filterStates(provinces);
         }, error => {
             console.log(error);
             runInAction(()=> {
                 this.error = true;
             })
-            alert("Unable to load data")
+            // alert("Unable to load data")
         })
     }
 
@@ -35,23 +40,39 @@ class Store {
     filterStates = (provinces: Array<any>)=> {
         const states = provinces.filter((province: any)=> !province.province.includes('County') && province.lat && province.long && !province.province.includes('Grand Princess') && !province.province.includes('Diamond Princess') && !province.province.includes('New Mexico') && !province.province.includes('Puerto Rico') && province.province !== 'US' && !province.province.includes(',') ) //states also don't usually include comma in their names 
         this.states = states;
-        console.log(states);
+        // console.log(states);
     }
 
-    // get covid statistic for a given state
-    // getStats = (state: string)=> {
-    //     console.log(state)
-    //     getStat(state).then(res => {
-    //         const stat = res.data.data;
-    //         console.log(stat);
-    //     }, error => {
-    //         console.log(error);
-    //         runInAction(()=> {
-    //             this.error = true;
-    //         })
-    //         alert("Unable to load data");
-    //     })
-    // }
+    getCountries = ()=> {
+        getCountries().then(res => {
+            console.log(res.data);
+            const countries = res.data;
+            this.sortCountries(countries);
+            // this.countries = res.data;
+        }).then(error=> console.log(error))
+    }
+
+    sortCountries = (countries: Array<any>)=> {
+        let sorted;
+        sorted = countries.sort((countryA: any, countryB: any)=> {
+            if(countryA.name.common < countryB.name.common) {
+                return -1;
+            }
+
+            else if (countryA.name.common > countryB.name.common ) {
+                return 1;
+            }
+            return 0 //no sorting
+        })
+        this.countries = sorted;
+    }
+
+    // select country
+    selectCountry = (country: any)=> {
+        runInAction(()=> {
+            this.selectedCountry = country;
+        })
+    }
 
 }
 

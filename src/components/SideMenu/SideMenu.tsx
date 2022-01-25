@@ -19,11 +19,13 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
     const isMenuOpen = (state: any)=> {
         return state.isOpen;
     };
+    // props.store.getCountries();
 
     const [stateList, setList] = React.useState([])
     const [selectedState, setSelectedState]: any = React.useState(null)
+    // const [selectedCountry, setSelectedCountry]: any = React.useState(null)
     React.useEffect(() => {
-        setList(props.store.states)
+        setList(props.store.states);
     }, [props.store.states])
 
     // search through the states list
@@ -65,10 +67,26 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
         setSelectedState(null);
     }
 
+    const handleCountrySelect = (event: any)=> {
+        console.log(JSON.parse(event.target.value));
+        const country = JSON.parse(event.target.value);
+        console.log(country);
+        // setSelectedCountry(country);
+        props.store.selectCountry(country);
+        // console.log(event.target.value.name.common);
+    }
+
     return (
         // <div style= {{height: '100%', width: '30%'}}>
         <SlideMenu left isOpen={props.isOpen} width={ '30%' } onClose={()=>props.toggle(false)} className = "bg-light menu-style" outerContainerId={props.outerContainerId} onOpen={ ()=>props.toggle(true) } onStateChange={ isMenuOpen }>
             <div className="menu-inner container-fluid p-3" >
+                <select name="countries" placeholder="Select country" onChange={handleCountrySelect} defaultValue="" id="select-country">
+                    <option value="" disabled>Select country</option>
+                    {props.store.countries.map((country: any, index: number) => (
+                        <option key={index} value={JSON.stringify(country)}>{country.name.common}</option>
+                    ))}
+                </select>
+                <hr className="w-100" color="grey" />
                 {selectedState ? (
                     <div className="row">
                         <div className="col">
@@ -193,7 +211,7 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
                         <InputGroup className="mb-3">
                             <InputGroup.Text><Search /></InputGroup.Text>
                             <FormControl
-                            placeholder="Search"
+                            placeholder="Search states"
                             aria-label="Search"
                             aria-describedby="basic-addon2"
                             // onKeyUp = {search}
@@ -210,7 +228,7 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
                                         return (
                                             <div className="row list" key={index} onClick={()=>selectState(state) }>
                                                 <div className="col-10">
-                                                    <h6 className="h6 text-muted">{state.province}</h6>
+                                                    <h6 className="h6 text-muted">{state.province ? state.province : "Unavailable"}</h6>
                                                 </div>
                                                 <div className="col-2">
                                                     <ChevronRight color='lightgrey' className="mb-2" />

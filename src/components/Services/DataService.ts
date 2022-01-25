@@ -31,4 +31,11 @@ export const getStat = async (state: string)=> {
     return res;
 }
 
+// get list of countries
+export const getCountries = async ()=> {
+    // let response
+    const res = await axios.get('https://restcountries.com/v3.1/all');
+    return res;
+}
+
 export default getProvinces;

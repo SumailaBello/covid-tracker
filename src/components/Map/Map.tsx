@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import CustomMarker from './CustomMarker';
 import { observer, inject } from "mobx-react"; 
-// import { List, AutoSizer } from "react-virtualized";
 
 interface center {
     lat: number,
@@ -24,6 +23,13 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
         },
         zoom: 7
     };
+    const [mapProps, setMapProps] = useState({
+        center: {
+        lat:  37.09024,
+        lng:  -95.712891
+        },
+        zoom: 7
+    })
     // console.log(props.store.provinces)
 
     const handleApiLoaded = (map: any, maps: any)=> {
@@ -32,6 +38,23 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
     }
 
     React.useEffect(()=> {
+        // const center = props.store.selectedCountry.latlng;
+        console.log(props.store.selectedCountry)
+        if (props.store.selectedCountry) {
+            setMapProps({
+                center: {
+                    lat:  props.store.selectedCountry.latlng[0],
+                    lng:  props.store.selectedCountry.latlng[1]
+                },
+                zoom: 7
+                    
+            })
+            props.store.getProvinces(props.store.selectedCountry.cca3);
+        }
+    }, [props.store.selectedCountry])
+
+    React.useEffect(()=> {
+        props.store.getCountries();
         props.store.getProvinces('USA');
     }, [])
 
@@ -40,14 +63,14 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
             <GoogleMapReact
             bootstrapURLKeys={{ 
                 key: 'AIzaSyCUfGRjkRG9pBXCobu8lphHw3qv0OMR0-M', language: 'en',
-                region: 'us',
+                // region: 'us',
                 libraries:['places'], 
             }}
             // yesIWantToUseGoogleMapApiInternals
-            defaultCenter={props.center ? props.center : defaultProps.center}
-            center= {props.center ? props.center : defaultProps.center}
-            defaultZoom={props.zoom ? props.zoom : defaultProps.zoom}
-            minZoom = {defaultProps.zoom}
+            defaultCenter={defaultProps.center}
+            center= {props.center ? props.center : mapProps.center}
+            defaultZoom={props.zoom ? props.zoom : mapProps.zoom}
+            minZoom = {mapProps.zoom}
             onGoogleApiLoaded={({ map, maps }: any) => handleApiLoaded(map, maps)}
             yesIWantToUseGoogleMapApiInternals={true}
             >
