@@ -6,16 +6,29 @@ class Store {
     states: Array<any> = [];
     error: boolean = false;
     selectedCountry: any = null;
+    alertMsg: string = "";
+    showAlert: boolean = false; //used to display alert message
     constructor() {
         makeObservable(this, {
             states: observable,
             error: observable,
             countries: observable,
             selectedCountry: observable,
+            alertMsg: observable,
+            showAlert: observable,
             filterStates: action,
             sortCountries: action,
+            toggleAlert: action,
             // searchStates: action,
         });
+    }
+
+    toggleAlert = (msg: string, show: boolean)=> {
+        this.alertMsg = msg;
+        this.showAlert = show;
+        setTimeout(()=> {
+
+        }, 5000)
     }
 
     // get provinces

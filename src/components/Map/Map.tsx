@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import CustomMarker from './CustomMarker';
 import { observer, inject } from "mobx-react"; 
+import { Alert } from 'react-bootstrap';
 
 interface center {
     lat: number,
@@ -75,6 +76,14 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
                     <CustomMarker key={index} state={state} lat={state.lat} lng={state.long} />
                 ))}
             </GoogleMapReact>
+            {props.store.showAlert ? (
+            <div style={{ position: 'absolute', top: '10%', width: '100%'}}>
+                <Alert variant='danger' className="text-center w-50 mx-auto">
+                    {props.store.alertMsg}
+                    <span style={{float: 'right', fontWeight: 'bold', cursor: 'pointer'}} onClick={()=> props.store.toggleAlert("")}>X</span>
+                </Alert>
+            </div>
+            ) : (null)}
         </div>
     )
 }))

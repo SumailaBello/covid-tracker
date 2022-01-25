@@ -56,7 +56,8 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
             // console.log(stat);
             setStat(stat[0])
         }, error => {
-            alert("Unable to load data");
+            props.store.toggleAlert("Unable to load data", true);
+            // alert("Unable to load data");
         })
     }
 
@@ -224,7 +225,7 @@ const SideMenu: React.FC<Props> = inject('store')(observer((props)=> {
                                         return (
                                             <div className="row list" key={index} onClick={()=>selectState(state) }>
                                                 <div className="col-10">
-                                                    <h6 className="h6 text-muted">{state.province ? state.province : "Unavailable"}</h6>
+                                                    <h6 className="h6 text-muted">{state.province ? state.province : "Unknown Province"}</h6>
                                                 </div>
                                                 <div className="col-2">
                                                     <ChevronRight color='lightgrey' className="mb-2" />

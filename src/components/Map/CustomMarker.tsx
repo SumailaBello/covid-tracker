@@ -28,7 +28,7 @@ export const CustomMarker: React.FC<Props> = inject('store')(observer((props) =>
             }
         }, error => {
             console.log(error);
-            alert("Unable to load data");
+            props.store.toggleAlert("Unable to load data", true);
         })
         return (()=> {
             mounted = false;
@@ -75,7 +75,7 @@ export const CustomMarker: React.FC<Props> = inject('store')(observer((props) =>
         }
       >
         <strong className = "marker h6 bg-danger text-light">
-            {props.state.province ? props.state.province : 'Unavailable'}
+            {props.state.province ? props.state.province : 'Unknown Province'}
         </strong>
       </OverlayTrigger>
     )
