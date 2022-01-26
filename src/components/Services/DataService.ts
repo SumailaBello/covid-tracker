@@ -16,7 +16,7 @@ export const getProvinces = async (isoCode: string)=> {
 
 /**get covid stats by state/province*/
 export const getStat = async (state: string)=> {
-    const headers = { 
+    const headers = {
         "x-api-key": "bzShtIxdeQ4MeypyViSPz5uVNptWniJB8eQphg0K"
     };
     const options: AxiosRequestConfig = {

@@ -41,7 +41,7 @@ class Store {
             // console.log(provinces);
             this.filterStates(provinces);
         }, error => {
-            // console.log(error);
+            console.log(error.response);
             runInAction(()=> {
                 this.error = true;
             })
@@ -62,7 +62,7 @@ class Store {
             const countries = res.data;
             this.sortCountries(countries);
             // this.countries = res.data;
-        }).then(error=> console.log(error))
+        }).catch(error=> console.log(error))
     }
 
     sortCountries = (countries: Array<any>)=> {
