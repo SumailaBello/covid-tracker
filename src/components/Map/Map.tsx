@@ -49,12 +49,12 @@ const MainApp: React.FC<Props> = inject('store')(observer((props)=> {
             })
             props.store.getProvinces(props.store.selectedCountry.cca3);
         }
-    }, [props.store.selectedCountry])
+    }, [props.store.selectedCountry, props.store])
 
     React.useEffect(()=> {
         props.store.getCountries();
         props.store.getProvinces('USA');
-    }, [])
+    }, [props.store])
 
     return (
         <div style={{ height: '100vh', width: '100%' }}>

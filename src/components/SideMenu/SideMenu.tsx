@@ -3,7 +3,7 @@ import { slide as SlideMenu } from 'react-burger-menu';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import { Search, ChevronRight, XCircle, ChevronLeft } from 'react-feather';
+import { Search, ChevronRight, ChevronLeft } from 'react-feather';
 import './SideMenu.css'
 import { observer, inject } from "mobx-react";
 import { getStat } from '../Services/DataService';

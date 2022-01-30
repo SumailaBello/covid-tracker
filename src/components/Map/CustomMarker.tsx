@@ -33,7 +33,7 @@ export const CustomMarker: React.FC<Props> = inject('store')(observer((props) =>
         return (()=> {
             mounted = false;
         })
-    }, [])
+    }, [props.state.province, props.store])
 
     const finalize = (data: any)=> {
         setData(data)
